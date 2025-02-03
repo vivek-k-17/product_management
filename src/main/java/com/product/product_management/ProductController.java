@@ -39,6 +39,7 @@ public class ProductController {
 
     @PutMapping("/{productId}")
     public Product updateProduct(@PathVariable int productId, @RequestBody Product p1) {
+    	System.out.println(p1.getProductName()+p1.getPrice());
         return ps.updateProduct(productId, p1);
     }
 

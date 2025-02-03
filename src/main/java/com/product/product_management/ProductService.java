@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,7 +31,6 @@ public class ProductService {
     }
 
 
-    
     public Product createProduct(Product p1, int categId) {
         Optional<Category> oc = categoryRepository.findById(categId);
 
@@ -43,14 +44,12 @@ public class ProductService {
 
     
     public Product updateProduct(int productId, Product productDetails) {
-        Optional<Product> op = productRepository.findById(productId);
+    	Product  op = productRepository.findById(productId).orElse(null);
         
-        if (op.isPresent()) {
-            Product p1= op.get();
-            p1.setProductName(productDetails.getProductName());
-            p1.setPrice(productDetails.getPrice());
-            p1.setCategory(productDetails.getCategory());
-            return productRepository.save(p1);
+        if (op!=null) {
+            op.setProductName(productDetails.getProductName());
+            op.setPrice(productDetails.getPrice());
+            return productRepository.save(op);
         }
         
         return null; 

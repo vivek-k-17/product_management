@@ -10,6 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 	public interface CategoryRepository extends JpaRepository<Category, Integer> {
 
-	Page<Category> findAll(Pageable p);
+//	Page<Category> findAll(Pageable p);
 	
 }
